@@ -6,11 +6,10 @@ class Solution:
             small_str, large_str = str1, str2
         else:
             small_str, large_str = str2, str1
-        if large_str == small_str*int(len(large_str)/len(small_str)):
-            return small_str
-        gcd = ""
-        for i in range(1, (len(small_str)//2)+1):
-            if (small_str == small_str[0:i]*(len(small_str)//len(small_str[0:i]))
-                and large_str == small_str[0:i]*(len(large_str)//len(small_str[0:i]))):
-                gcd = small_str[0:i]
-        return gcd
+        for i in range(len(small_str), 0, -1):
+            substr = small_str[0:i]
+            if (len(large_str) % len(substr) == 0
+            and large_str == substr * int(len(large_str)/len(substr))
+            and small_str == substr * int(len(small_str)/len(substr))):
+                return substr
+        return ""
